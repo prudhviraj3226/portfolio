@@ -1,0 +1,186 @@
+<html>
+<head>
+
+			<script src="js/angular.min.js"></script>
+			<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<link rel="stylesheet" type="text/css" href="css/style.css">
+ </head>
+<body ng-app="myApp" ng-controller="addprojectCtrl">
+				<div class="container">
+				<div class="row">
+				<div class="col">
+				<div class="col-lg-12">
+					<div class="panel panel-primary">
+						<div class="panel-heading"><center>Add New Project</center><button class="button button5" ng-click="back()">BACK</button>
+						</div>
+						<div class="panel-body">
+						<div class="row">
+						<div class="form">
+						<form class="login-form">
+      <input  type="text" name="projectname" id="projectname" ng-model="params.projectname" placeholder="projectname"/><br>
+	<input  type="date"  name="startdate" ng-model="params.startdate" placeholder="startdate"/><br>
+	<input type="text"  name="manager" ng-model="params.manager" placeholder="manager"/><br>
+	<input type="text" name="skillset" ng-model="params.skillset" placeholder="skillset"/>
+	<button ng-click="searchskillset(params)">Search</button>
+	<div>
+	<table border="1">
+	<tr >
+     </tr><tr ng-repeat="x in result">
+	<td>Add to project</td> <td><button ng-click="addemployees(x)" id="resource">{{x._id}}</td>
+	</tr>
+	</table>
+	</div>
+
+	  
+
+      <button ng-click="addproject(params)">Add Project</button>
+
+    </form>
+</div>
+						
+						
+							</div>
+							
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+ 
+	
+	
+<script>
+
+<!-- AngularJS module define AngularJS applications -->
+var app = angular.module('myApp', []);
+app.controller('addprojectCtrl', function($scope,$http,$window,$rootScope) {
+   
+    var assigned_array = [];
+	var employeename =[];
+
+		
+	
+	$scope.searchskillset = function(params) {
+	var skillset = params.skillset;
+	
+      var json = {
+
+        "skillset": skillset
+		};
+		
+		
+		
+		$http.post("/availableresources",json).then(function(response) {
+            
+			
+			if (response.data.error == undefined) {
+			console.log("AVAILABLE RESORCES"+JSON.stringify(response))
+			$rootScope.result=response.data.result;
+				
+				
+                $scope.username = response.data.result[0].username;
+				
+				
+               $scope.totalcount=response.data.result.length;
+                
+            } else {
+                $window.alert('No resource is available');
+    }
+		 })
+	}
+	
+	$scope.back = function() {
+	
+	window.location.assign("/managerprofile");
+			
+	}
+	$scope.addemployees = function(x) {
+	var employee = x._id;
+	x.status=1;
+	x.project = document.getElementById('projectname').value;
+	var resourcetype = prompt("BILLABLE OR SHADOW", "BILLABLE");
+    
+      var json = {
+        "_id": employee,
+		"project":x.project,
+		"resourcetype":resourcetype
+		};
+		
+		console.log("RESOURCE TYPE"+resourcetype)
+		
+		x.resourcetype=resourcetype;
+		
+		$http.post("/updateavailableresources",json).then(function(response) {
+            
+			
+			if (response.data.error == undefined) {
+			
+			 
+
+                                $window.alert('Employee added successfully');
+
+            } else {
+                $window.alert('No resource is available');
+
+            }
+        })
+		
+                assigned_array.push(x);
+            $rootScope.employees = assigned_array;
+			console.log("TOTAL ADDED EMPLOYEES IN ARRAY"+JSON.stringify($scope.employees));
+	}
+	
+	
+	
+	$scope.addproject = function(params) {
+	var projectname = params.projectname;
+	
+	var startdate = params.startdate;
+	
+	var manager = params.manager;
+	
+	 employeename = $rootScope.employees;
+	
+	
+      var json = {
+        "_id": projectname,
+		"startdate": startdate,
+		"manager":manager,
+		"employeename": employeename,
+      };
+		
+		console.log("JSON DATA BEFORE ADDING PROJECT"+JSON.stringify(json))
+		
+		$http.post("/addproject",json).then(function(response) {
+            
+			
+			if (response.data.error == undefined) {
+			console.log("GETTING RESPONSE FROM NODE"+JSON.stringify(response))
+			                                $window.alert('Project added successfully');
+
+				 
+
+                
+            } else {
+                $window.alert('No resource is available');
+
+            }
+			
+			
+			
+			
+			
+        })
+		
+		
+	}
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+
+<html>
+<head>
+<style>
+body {
+                font-family: "Lato", sans-serif;
+                transition: background-color 0.5s;
+            }
+
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                transition: 0.5s;
+                padding-top: 100px;
+            }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+            .offcanvas a:focus,
+            .sidenav a:hover {
+                color: #f1f1f1;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            #main {
+                transition: margin-left 0.5s;
+                padding: 16px;
+            }
+            @media screen and (max-height: 450px) {
+                .sidenav {
+                    padding-top: 15px;
+                }
+                .sidenav a {
+                    font-size: 18px;
+                }
+            }
+</style>
+ <script src="js/angular.min.js"></script>
+ 
+ <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script src="js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+ 
+ </head>
+<body ng-app="myApp" ng-controller="managerprofileCtrl" ng-init="managerprofile()">
+
+
+<div id="wrapper">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">{{username}}</a>
+				</div>
+			
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/Login"><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	
+						<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="/allocatedresources">Allocated Resources</a>
+  <a href="/totalemployeesinproject">Total Employees in Project</a>
+    <a href="/editprojectresources">Edit Project Resources</a>
+  <a href="/availableresources">Available Resources</a>
+    <a href="/addproject">Add New Project</a>
+
+</div>
+		
+	<div class="container">
+	
+		<div class="row">
+			<div class="col">
+				<div class="col-lg-12">
+					<div class="panel panel-primary">
+						<div class="panel-heading"><span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span><center>PROJECTS</center></div>
+						<div class="panel-body">
+							<div class="row">
+								
+
+							
+							
+							
+									<div ng-repeat="x in result">
+									
+													<div class="col-lg-12">
+								
+				
+											<fieldset>
+                                  <legend>Project Details</legend>
+									{{x._id}}
+									</fieldset>
+									<br>
+									<br>
+                                 </div>
+		                         
+		
+								</div>
+								
+							
+								
+							</div>
+                       <div class="row">
+					   <div class="col-lg-12">
+								<h4>Number of Projects</h4><b>{{totalcount}}</b>
+
+                       </div>
+					   
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "350px";
+    document.getElementById("main").style.marginLeft = "250px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+    document.body.style.backgroundColor = "white";
+}
+
+<!-- AngularJS module define AngularJS applications -->
+var app = angular.module('myApp', []);
+app.controller('managerprofileCtrl', function($scope,$http,$window) {
+   
+    
+	
+	$scope.managerprofile = function(params) {
+	
+	
+      var json = {
+
+        "manager": localStorage.getItem('email')
+		};
+		
+		
+		
+		$http.post("/managerprofile",json).then(function(response) {
+            
+			
+			if (response.data.error == undefined) {
+			
+			console.log("MANAGER PROFILE"+JSON.stringify(response))
+			
+			
+			
+			
+			$scope.result=response.data.result;
+				
+		$scope.username = response.data.result[0].manager;
+				
+			
+            
+				
+               $scope.totalcount=response.data.result.length;
+				
+				 
+
+                
+            } else {
+                $window.alert('Please Check Entered ID');
+
+            }
+			
+			
+			
+			
+			
+        })
+		
+		
+	}
+});
+</script>
+
+</body>
+</html>

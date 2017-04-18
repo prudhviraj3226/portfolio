@@ -1,0 +1,149 @@
+
+<html>
+<head>
+
+ <script src="js/angular.min.js"></script>
+ 
+ <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script src="js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	
+ 
+ </head>
+<body ng-app="myApp" ng-controller="projectresourcesCtrl">
+
+<div class="form">
+    
+    <form class="login-form">
+      <input type="text" name="skillset" ng-model="params.skillset" placeholder="skillset"/>
+      <button ng-click="projectresources(params)">CHECK DETAILS</button>
+      
+    </form>
+</div>
+
+	<div class="container">
+	
+	
+		<div class="row">
+			<div class="col">
+				<div class="col-lg-12">
+					<div class="panel panel-primary">
+						<div class="panel-heading"><center>Allocated Resources on Projects Based on SkillSet</center><button class="button button5" ng-click="back()">BACK</button></div>
+						<div class="panel-body">
+							<div class="row">
+								
+
+							
+							
+							
+									<div ng-repeat="x in result">
+									
+													<div class="col-lg-12">
+	
+				
+											<fieldset>
+                                  <legend>Employee Details</legend>
+									<h3>USER</h3>{{x._id}}<h3>Project</h3>{{x.project}}
+									</fieldset>
+									<br>
+									<br>
+                                 </div>
+		                         
+		
+								</div>
+								
+							
+								
+							</div>
+                       <div class="row">
+					   <div class="col-lg-12">
+								<h4>Number of Projects</h4><b>{{totalcount}}</b>
+
+                       </div>
+					   
+						</div>
+						<div class="row">
+					   <div class="col-lg-12">
+								<h4>Allocted Resources on Different Projects</h4><b>{{totalcount}}</b>
+
+                       </div>
+					   
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+
+
+
+
+
+
+
+<script>
+
+<!-- AngularJS module define AngularJS applications -->
+var app = angular.module('myApp', []);
+app.controller('projectresourcesCtrl', function($scope,$http,$window) {
+   
+    
+	
+	$scope.projectresources = function(params) {
+	var skillset = params.skillset;
+	
+      var json = {
+
+        "skillset": skillset
+		};
+		
+		
+		
+		$http.post("/allocatedresources",json).then(function(response) {
+            
+			
+			if (response.data.error == undefined) {
+			console.log("TOTAL ALLOCATED RESOURCES"+JSON.stringify(response))
+			$scope.result=response.data.result;
+				
+				
+                $scope.username = response.data.result[0].username;
+				
+				$scope.project = response.data.result[0].project;
+				
+               $scope.totalcount=response.data.result.length;
+				
+				 
+
+                
+            } else {
+                $window.alert('No Resource is allocated on this skillset');
+
+            }
+			
+			
+			
+			
+			
+        })
+		
+		
+	}
+	
+	$scope.back = function() {
+	
+	window.location.assign("/managerprofile");
+			
+	}
+	
+	
+});
+</script>
+
+</body>
+</html>
