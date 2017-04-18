@@ -47,7 +47,7 @@
     </head>
 
 
-    <body class="fixed-left" ng-app="myApp" ng-controller="totalemployeesinprojectCtrl" ng-init="totalemployeesinproject()">
+    <body class="fixed-left" ng-app="myApp" ng-controller="totalemployeesinprojectCtrl">
 
         <!-- Begin page -->
         <div id="wrapper">
@@ -81,13 +81,12 @@
 						
 						<div class="form-group">
 	                                                
-	                                                <div class="col-sm-10">
-	                                                    <select class="form-control">
-	                                                        <option>1</option>
-	                                                        <option>2</option>
-	                                                        <option>3</option>
-	                                                        <option>4</option>
-	                                                        <option>5</option>
+	                                                <div class="col-sm-20">
+	                                                    <select class="form-control" ng-model="item" ng-change="update(item)">
+														    <option></option>
+	                                                    
+	                                                        <option>ICE</option>
+	                                                        <option>HOME</option>
 	                                                    </select>
 						</div>
 						</div>
@@ -201,7 +200,7 @@
                                         </div>
 
                                         <div class="widget-detail-1">
-                                            <h2 class="p-t-10 m-b-0"> ICE </h2>
+                                            <h2 class="p-t-10 m-b-0">{{project}}  </h2>
                                             <p class="text-muted">projectname</p>
                                         </div>
                                     </div>
@@ -446,20 +445,25 @@ app.controller('totalemployeesinprojectCtrl', function($scope,$http,$window) {
    
     
 	
-	$scope.totalemployeesinproject = function(params) {
+	
+	
+	$scope.update = function(params) {
 	
 		var json = {
 
-        "_id": localStorage.getItem('email')
+        "_id": params
 		};
 		
 		
 		
 		$http.post("/totalemployeesinproject",json).then(function(response) {
             
-			
+				
 			if (response.data.error == undefined) {
 			console.log("TOTAL EMPS IN PROJECT"+JSON.stringify(response))
+			
+			$scope.project = response.data.result[0]._id;
+				
 			$scope.result=response.data.result[0].employees;
 				
 				
@@ -496,12 +500,16 @@ app.controller('totalemployeesinprojectCtrl', function($scope,$http,$window) {
 				
                 
 				
+				
                $scope.totalcount1=response.data.result.length;
 				
 				 
                 
             } else {
-                $window.alert('Project1 is not Present');
+                $window.alert('NO BILLABLE RESOURCES');
+				
+               $scope.totalcount1=0;
+				
 
             }
 			
@@ -522,6 +530,8 @@ app.controller('totalemployeesinprojectCtrl', function($scope,$http,$window) {
 				
 				
                 
+              
+				
 				
 				
                $scope.totalcount2=response.data.result.length;
@@ -529,7 +539,10 @@ app.controller('totalemployeesinprojectCtrl', function($scope,$http,$window) {
 				 
                 
             } else {
-                $window.alert('Project1 is not Present');
+                $window.alert('No SHADOW RESOURCES');
+				
+               $scope.totalcount2=0;
+				
 
             }
 			

@@ -477,7 +477,7 @@ app.post('/totalemployeesinproject',function(req,res){
 	
 	
 		var json={
-		"_id":"ICE"
+		"_id":req.body._id
 		
 	};
 		projectdb.find(json,function(err,data)
@@ -823,6 +823,40 @@ db.find(json,function(err,data)
 			{
  
 		
+		
+		if (data.length) {
+          response = {
+                "result": data
+            }
+			console.log(response);
+            res.json(response);
+        } else {
+          error = {
+                "error": "Sorry retrieve failed"
+            }
+            res.json(error);
+        }
+		
+		
+		
+	})		
+	
+});
+
+
+app.post('/totalbenchresources',function(req,res){
+	
+		json=
+	{
+		"project":"BENCH",
+		"resourcetype":"BENCH"
+	}
+db.find(
+		{	"project":"BENCH",
+		"resourcetype":"BENCH",
+	"skillset":{$ne:"manager"}},function(err,data)
+			{
+ 
 		
 		if (data.length) {
           response = {
