@@ -102,73 +102,13 @@ app.controller('deleteprojectCtrl', function($scope,$http,$window,$rootScope) {
 			
         })
 		
-		
-		
-		
-			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		$http.post("/deleteproject",json).then(function(response) {
-            
-			
 			if (response.data.error == undefined) {
 			     $window.alert('Delete made Successfully');
-
-           	
-				 
-
-                
             } else {
                 $window.alert('Please Check Entered ID');
-
             }
-			
-			
-			
-			
-			
         })
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	
