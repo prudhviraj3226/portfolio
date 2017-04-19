@@ -62,17 +62,17 @@ app.get('/addproject',function(req,res){
 });
 
 
-app.get('/indexmanager',function(req,res){
+app.get('/manager',function(req,res){
   res.sendFile(__dirname+'/public/indexmanager.html');
 });
 
 
-app.get('/extraprojects',function(req,res){
-  res.sendFile(__dirname+'/public/extras-projects.html');
+app.get('/projects',function(req,res){
+  res.sendFile(__dirname+'/public/projects.html');
 });
 
-app.get('/extratasks',function(req,res){
-  res.sendFile(__dirname+'/public/extras-taskboard.html');
+app.get('/resources',function(req,res){
+  res.sendFile(__dirname+'/public/resources.html');
 });
 
 
@@ -92,11 +92,11 @@ app.get('/totalemployeesinproject',function(req,res){
 
 
 app.get('/profile',function(req,res){
-  res.sendFile(__dirname+'/public/index.html');
+  res.sendFile(__dirname+'/public/employee.html');
 });
 
 app.get('/managerprofile',function(req,res){
-  res.sendFile(__dirname+'/public/indexmanager.html');
+  res.sendFile(__dirname+'/public/manager.html');
 });
 
 app.get('/editprojectresources',function(req,res){
