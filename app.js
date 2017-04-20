@@ -75,6 +75,17 @@ app.get('/resources',function(req,res){
   res.sendFile(__dirname+'/public/resources.html');
 });
 
+app.get('/employeesbillableinfo',function(req,res){
+  res.sendFile(__dirname+'/public/employeesbillableinfo.html');
+});
+
+app.get('/employeesshadowinfo',function(req,res){
+  res.sendFile(__dirname+'/public/employeesshadowinfo.html');
+});
+
+app.get('/employeesbenchinfo',function(req,res){
+  res.sendFile(__dirname+'/public/employeesbenchinfo.html');
+});
 
 
 app.get('/availableresources',function(req,res){
@@ -609,7 +620,8 @@ app.post('/editprojectresources',function(req,res){
 	
 		
 		 "status":"0",
-		 "project":"BENCH"
+		 "project":"BENCH",
+		 "resourcetype":"BENCH"
 		 
 	};
 	 projectdb.update({"_id":req.body.projectname},{ $pull: { employees: {"_id":req.body.gmailid  } } },function(err,data)
@@ -749,7 +761,8 @@ app.post('/updatechangeresources',function(req,res){
 	
 		
 		 "status":"0",
-		 "project":"BENCH"
+		 "project":"BENCH",
+		 "resourcetype":"BENCH"
 		 
 	};
 	

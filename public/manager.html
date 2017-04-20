@@ -24,6 +24,7 @@
         <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
 
 <script src="js/angular.min.js"></script>
+	<script src="js/managerctrl.js"></script>
  
         <script src="assets/js/modernizr.min.js"></script>
 
@@ -31,7 +32,7 @@
     </head>
 
 
-    <body class="fixed-left" ng-app="myApp" ng-controller="totalemployeesinprojectCtrl">
+    <body class="fixed-left" ng-app="myApp" ng-controller="totalemployeesinprojectCtrl" ng-init="totalprojects()">
 
         <!-- Begin page -->
         <div id="wrapper">
@@ -69,8 +70,8 @@
 	                                                    <select class="form-control" ng-model="item" ng-change="update(item)">
 														    <option></option>
 	                                                    
-	                                                        <option>ICE</option>
-	                                                        <option>HOME</option>
+	                                                        <option ng-repeat="x in projects">{{x._id}}</option>
+	                                                        
 	                                                    </select>
 						</div>
 						</div>
@@ -99,7 +100,7 @@
                             
 
                             <li>
-                                <a href="#" class="text-custom">
+                                <a href="/Login" class="text-custom">
                                     <i class="zmdi zmdi-power"></i>
                                 </a>
                             </li>
@@ -113,7 +114,7 @@
                         	<li class="text-muted menu-title">Navigation</li>
 
                             <li>
-                                <a href="/manager" class="waves-effect"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
+                                <a href="/managerprofile" class="waves-effect"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
                             </li>
 
                             <li>
@@ -176,28 +177,6 @@
                         		</div>
                             </div><!-- end col -->
 
-                            <div class="col-lg-6 col-md-6">
-                        		<div class="card-box">
-                                    
-
-                        			<h4 class="header-title m-t-0 m-b-30">Billable Resources</h4>
-
-                                    <div class="widget-box-2">
-                                        <div class="widget-detail-2">
-                                            <span class="badge badge-success pull-left m-t-20">32% <i class="zmdi zmdi-trending-up"></i> </span>
-                                            <h2 class="m-b-0"> {{totalcount1}} </h2>
-                                            <p class="text-muted m-b-25">empscount</p>
-                                        </div>
-                                        <div class="progress progress-bar-success-alt progress-sm m-b-0">
-                                            <div class="progress-bar progress-bar-success" role="progressbar"
-                                                 aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
-                                                 style="width: 77%;">
-                                                <span class="sr-only">77% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                        		</div>
-                            </div><!-- end col -->
 
                             <div class="col-lg-6 col-md-6">
                         		<div class="card-box">
@@ -243,6 +222,59 @@
                         		</div>
                             </div><!-- end col -->
 
+							
+							
+							
+							
+							
+							
+
+                            <div class="col-lg-6 col-md-6">
+                        		<div class="card-box">
+                                    
+
+                        			<h4 class="header-title m-t-0 m-b-30">Billable Resources</h4>
+
+                                    <div class="widget-box-2">
+                                        <div class="widget-detail-2">
+                                            <span class="badge badge-success pull-left m-t-20">32% <i class="zmdi zmdi-trending-up"></i> </span>
+                                            <h2 class="m-b-0"> {{totalcount1}} </h2>
+                                            <p class="text-muted m-b-25">empscount</p>
+                                        </div>
+                                        <div class="progress progress-bar-success-alt progress-sm m-b-0">
+                                            <div class="progress-bar progress-bar-success" role="progressbar"
+                                                 aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
+                                                 style="width: 77%;">
+                                                <span class="sr-only">77% Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                        		</div>
+                            </div><!-- end col -->
+
+    						
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
                         </div>
                         <!-- end row -->
 
@@ -301,52 +333,7 @@
         <!-- App js -->
         <script src="assets/js/jquery.core.js"></script>
         <script src="assets/js/jquery.app.js"></script>
-		<script>
-
-var app = angular.module('myApp', []);
-app.controller('totalemployeesinprojectCtrl', function($scope,$http,$window) {
-	$scope.update = function(params) {
-		var json = {
-        "_id": params
-		};
-		$http.post("/totalemployeesinproject",json).then(function(response) {
-			if (response.data.error == undefined) {
-			console.log("TOTAL EMPS IN PROJECT"+JSON.stringify(response))
-			$scope.project = response.data.result[0]._id;
-			$scope.result=response.data.result[0].employees;
-                $scope.username = response.data.result[0].employees[0].username;
-				$scope.resourcetype = response.data.result[0].employees[0].resourcetype;
-               $scope.totalcount=response.data.result[0].employees.length;
-            } else {
-                $window.alert('Project is not Present');
-            }
-        })
-		$http.post("/totalbillableresourcesinproject",json).then(function(response) {
-			if (response.data.error == undefined) {
-			console.log("TOTAL BILLABLE EMPS IN PROJECT"+JSON.stringify(response))
-			$scope.result=response.data.result[0].employees;
-				
-               $scope.totalcount1=response.data.result.length;
-            } else {
-                $window.alert('NO BILLABLE RESOURCES');
-               $scope.totalcount1=0;
-            }
-        })
-		$http.post("/totalshadowresourcesinproject",json).then(function(response) {
-			if (response.data.error == undefined) {
-			console.log("TOTAL SHADOW EMPS IN PROJECT"+JSON.stringify(response))
-			$scope.result=response.data.result[0].employees;
-               $scope.totalcount2=response.data.result.length;
-            } else {
-                $window.alert('No SHADOW RESOURCES');
-				
-               $scope.totalcount2=0;
-            }
-        })
-	}
 	
-});
-</script>
 
 
     </body>
