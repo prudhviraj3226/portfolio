@@ -1,8 +1,11 @@
 <html>
 <head>
  <script src="js/angular.min.js"></script>
- 	<script src="js/controllers/loginctrl.js"></script>
+ 	<script src="js/controllers/app.js"></script>
  
+ 	<script src="js/controllers/loginctrl.js"></script>
+ <script src="js/services/service.js"></script>
+	
  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  <script src="js/bootstrap.min.js"></script>
@@ -10,7 +13,7 @@
 	
  
  </head>
-<body ng-app="myApp" ng-controller="loginCtrl">
+<body ng-app="myApp" ng-controller="loginCtrl as vm">
 
 
 
@@ -18,20 +21,18 @@
   <div class="form">
    
     <form class="login-form">
-      <input type="text" name="gmailid" ng-model="params.gmailid" placeholder="gmailid"/>
-      <input type="password" name="password" ng-model="params.password" placeholder="password"/>
-      <button ng-click="login(params)">login</button>
+      <input type="text" name="gmailid" ng-model="vm.gmailid" placeholder="gmailid"/>
+      <input type="password" name="password" ng-model="vm.password" placeholder="password"/>
+      <button ng-click="vm.login()">login</button>
       <p class="message">Not registered? <a href="/Registration">Create an account</a></p>
     </form>
-	<h1>{{result1}}</h1>
+	<h1>{{vm.result1}}</h1>
 
   </div>
 </div>
 
 
 
-
-<!-- AngularJS module define AngularJS applications -->
 
 
 </body>

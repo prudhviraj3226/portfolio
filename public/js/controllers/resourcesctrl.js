@@ -1,6 +1,7 @@
-var app = angular.module('myApp', []);
-app.controller('totalemployeesinprojectCtrl', function($scope, $rootScope, $http, $window) {
-    $scope.addemployees = function(z) {
+
+function totalemployeesinprojectCtrl($scope, $rootScope, $http, $window,httpFactory) {
+	var vm=this; 
+    vm.addemployees = function(z) {
         var employee = z._id;
         z.status = 1;
         z.project = localStorage.getItem('project');
@@ -12,23 +13,23 @@ app.controller('totalemployeesinprojectCtrl', function($scope, $rootScope, $http
         };
         console.log("RESOURCE TYPE" + resourcetype)
         z.resourcetype = resourcetype;
-        $http.post("/updateavailableresources", json).then(function(response) {
+       httpFactory.updateavailableresourcesapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 $window.alert('Employee added successfully');
             } else {
                 $window.alert('No resource is available');
             }
         })
-        $rootScope.employees = z;
+        vm.employees = z;
         console.log("EMP JSON" + JSON.stringify($rootScope.employees));
         var projectname = z.project;;
-        var employeename = $rootScope.employees;
+        var employeename = vm.employees;
         var json = {
             "projectname": projectname,
             "employeename": employeename,
         };
         console.log("UPDATING EACH EMP DETAILS" + JSON.stringify(json))
-        $http.post("/updateprojectdetails", json).then(function(response) {
+        httpFactory.updateprojectdetailsapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 $window.alert('Changes made Successfully');
             } else {
@@ -36,13 +37,13 @@ app.controller('totalemployeesinprojectCtrl', function($scope, $rootScope, $http
             }
         })
     }
-    $scope.removefromproject = function(params) {
+    vm.removefromproject = function(params) {
         var gmailid = params;
         var json = {
             "projectname": localStorage.getItem('project'),
             "gmailid": gmailid,
         };
-        $http.post("/editprojectresources", json).then(function(response) {
+        httpFactory.editprojectresourcesapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 $window.alert('Resource Deleted Successfully');
             } else {
@@ -50,42 +51,46 @@ app.controller('totalemployeesinprojectCtrl', function($scope, $rootScope, $http
             }
         })
     }
-    $scope.totalemployeesinproject = function(params) {
+    vm.totalemployeesinproject = function(params) {
         var json = {
             "_id": localStorage.getItem('project')
         };
-        $http.post("/totalbillableresourcesinproject", json).then(function(response) {
+        httpFactory.totalbillableresourcesinprojectapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 console.log("TOTAL BILLABLE EMPS IN PROJECT" + JSON.stringify(response))
-                $scope.result = response.data.result;
+                vm.result = response.data.result;
             } else {
                 $window.alert('NO BILLABLE RESOURCES');
             }
         })
-        $http.post("/totalshadowresourcesinproject", json).then(function(response) {
+        httpFactory.totalshadowresourcesinprojectapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 console.log("TOTAL SHADOW EMPS IN PROJECT" + JSON.stringify(response))
-                $scope.result1 = response.data.result;
+                vm.result1 = response.data.result;
             } else {
                 $window.alert('NO SHADOW RESOURCES');
             }
         })
-        $http.post("/totalbenchresources", json).then(function(response) {
+        httpFactory.totalbenchresourcesapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 console.log("TOTAL BENCH EMPS" + JSON.stringify(response))
-                $scope.result2 = response.data.result;
+                vm.result2 = response.data.result;
             } else {
                 $window.alert('NO BENCH RESOURCES');
             }
-        })
+        });
     }
-    $scope.out = function() {
+    vm.out = function() {
         window.location.assign("/employeesbillableinfo");
     }
-    $scope.shadowout = function() {
+    vm.shadowout = function() {
         window.location.assign("/employeesshadowinfo");
     }
-    $scope.benchout = function() {
+    vm.benchout = function() {
         window.location.assign("/employeesbenchinfo");
     }
-});
+}
+
+
+angular.module('myApp')
+.controller('totalemployeesinprojectCtrl',totalemployeesinprojectCtrl);

@@ -20,9 +20,16 @@
 								<link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
 								<link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
 								<script src="js/angular.min.js"></script>
+											<script src="js/controllers/app.js"></script>
+																																
+ 
 								<script src="js/controllers/employeesbillableinfoctrl.js"></script>
+										
+							
+							<script src="js/services/service.js"></script>
+	
 							</head>
-							<body class="fixed-left" ng-app="myApp" ng-controller="totalemployeeswithbillableCtrl" ng-init="totalemployeeswithbillable()">
+							<body class="fixed-left" ng-app="myApp" ng-controller="totalemployeeswithbillableCtrl as vm" ng-init="vm.totalemployeeswithbillable()">
 								<!-- Begin page -->
 								<div id="wrapper">
 									<!-- Top Bar Start -->
@@ -123,7 +130,7 @@
 													<div class="container">
 														<!-- end row -->
 														<div class="row">
-															<div class="col-lg-4" ng-repeat="x in result">
+															<div class="col-lg-4" ng-repeat="x in vm.result">
 																<div class="text-center card-box">
 																	<div class="dropdown pull-right">
 																		<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">

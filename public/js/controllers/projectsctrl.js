@@ -1,24 +1,25 @@
-var app = angular.module('myApp', []);
-app.controller('totalprojectsCtrl', function($scope, $http, $window, $location, $rootScope) {
-    var assigned_array = [];
+
+function totalprojectsCtrl($scope, $http, $window, $location, $rootScope,httpFactory) {
+   var vm=this;   
+   var assigned_array = [];
     var employeename = [];
-    $scope.searchskillset = function(params) {
+    vm.searchskillset = function(params) {
         var skillset = params.skillset;
         var json = {
             "skillset": skillset
         };
-        $http.post("/availableresources", json).then(function(response) {
+        httpFactory.availableresourcesapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 console.log("AVAILABLE RESORCES" + JSON.stringify(response))
-                $rootScope.result = response.data.result;
-                $scope.username = response.data.result[0].username;
-                $scope.totalcount = response.data.result.length;
+                vm.result = response.data.result;
+                vm.username = response.data.result[0].username;
+                vm.totalcount = response.data.result.length;
             } else {
                 $window.alert('No resource is available');
             }
         })
     }
-    $scope.addemployees = function(x) {
+    vm.addemployees = function(x) {
         var employee = x._id;
         x.status = 1;
         x.project = document.getElementById('projectname').value;
@@ -30,7 +31,7 @@ app.controller('totalprojectsCtrl', function($scope, $http, $window, $location, 
         };
         console.log("RESOURCE TYPE" + resourcetype)
         x.resourcetype = resourcetype;
-        $http.post("/updateavailableresources", json).then(function(response) {
+        httpFactory.updateavailableresourcesapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 $window.alert('Employee added successfully');
             } else {
@@ -38,14 +39,14 @@ app.controller('totalprojectsCtrl', function($scope, $http, $window, $location, 
             }
         })
         assigned_array.push(x);
-        $rootScope.employees = assigned_array;
-        console.log("TOTAL ADDED EMPLOYEES IN ARRAY" + JSON.stringify($scope.employees));
+        vm.employees = assigned_array;
+        console.log("TOTAL ADDED EMPLOYEES IN ARRAY" + JSON.stringify(vm.employees));
     }
-    $scope.addproject = function(params) {
+    vm.addproject = function(params) {
         var projectname = params.projectname;
         var startdate = params.startdate;
         var manager = params.manager;
-        employeename = $rootScope.employees;
+        employeename = vm.employees;
         var json = {
             "_id": projectname,
             "startdate": startdate,
@@ -53,7 +54,7 @@ app.controller('totalprojectsCtrl', function($scope, $http, $window, $location, 
             "employeename": employeename,
         };
         console.log("JSON DATA BEFORE ADDING PROJECT" + JSON.stringify(json))
-        $http.post("/addproject", json).then(function(response) {
+        httpFactory.addprojectapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 console.log("GETTING RESPONSE FROM NODE" + JSON.stringify(response))
                 $window.alert('Project added successfully');
@@ -62,15 +63,15 @@ app.controller('totalprojectsCtrl', function($scope, $http, $window, $location, 
             }
         })
     }
-    $scope.totalprojects = function(params) {
+    vm.totalprojects = function() {
         var json = {
             "manager": localStorage.getItem('email')
         };
-        $http.post("/totalprojects", json).then(function(response) {
+        httpFactory.totalprojectsapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 console.log("TOTAL  PROJECTS" + JSON.stringify(response))
-                $scope.projects = response.data.result;
-                $scope.manager = response.data.result[0].manager;
+                vm.projects = response.data.result;
+                vm.manager = response.data.result[0].manager;
                 //$scope.result=response.data.result[0].employees;
                 //$scope.totalcount=response.data.result[0].employees.length;
             } else {
@@ -78,22 +79,22 @@ app.controller('totalprojectsCtrl', function($scope, $http, $window, $location, 
             }
         })
     }
-    $scope.out = function(x) {
+    vm.out = function(x) {
         localStorage.setItem('project', x);
         window.location.assign("/resources");
     }
-    $scope.removeproject = function(x) {
+    vm.removeproject = function(x) {
         localStorage.setItem('project', x);
         var projectname = localStorage.getItem('project');
         var json = {
             "_id": projectname
         };
-        $http.post("/totalemployeesinproject", json).then(function(response) {
+        httpFactory.totalemployeesinprojectapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 console.log("TOTAL EMPS IN PROJECT" + JSON.stringify(response))
-                $rootScope.result = response.data.result[0].employees;
-                $scope.totalcount = response.data.result[0].employees.length;
-                angular.forEach($rootScope.result, function(value, index) {
+                vm.result = response.data.result[0].employees;
+                vm.totalcount = response.data.result[0].employees.length;
+                angular.forEach(vm.result, function(value, index) {
                     var json = {
                         "_id": value._id
                     }
@@ -108,12 +109,15 @@ app.controller('totalprojectsCtrl', function($scope, $http, $window, $location, 
                 $window.alert('Project is not Present');
             }
         })
-        $http.post("/deleteproject", json).then(function(response) {
+        httpFactory.deleteprojectapi(json).then(function(response) {
             if (response.data.error == undefined) {
                 $window.alert('Delete made Successfully');
             } else {
                 $window.alert('Please Check Entered ID');
             }
-        })
+        });
     }
-});
+}
+
+angular.module('myApp')
+.controller('totalprojectsCtrl',totalprojectsCtrl);

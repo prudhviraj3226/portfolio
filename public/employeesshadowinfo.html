@@ -20,9 +20,16 @@
 								<link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
 								<link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
 								<script src="js/angular.min.js"></script>
-								<script src="js/controllers/employeesshadowinfoctrl.js"></script>
+																		<script src="js/controllers/app.js"></script>
+																																
+ 
+									<script src="js/controllers/employeesshadowinfoctrl.js"></script>
+									
+							
+							<script src="js/services/service.js"></script>
+	
 							</head>
-							<body class="fixed-left" ng-app="myApp" ng-controller="totalemployeeswithshadowCtrl" ng-init="totalemployeeswithshadow()">
+							<body class="fixed-left" ng-app="myApp" ng-controller="totalemployeeswithshadowCtrl as vm" ng-init="vm.totalemployeeswithshadow()">
 								<!-- Begin page -->
 								<div id="wrapper">
 									<!-- Top Bar Start -->
@@ -125,7 +132,7 @@
 														<div class="row">
 															<div class="col-md-4">
 																<ul class="list-unstyled task-list" id="drag-upcoming">
-																	<li ng-repeat="x in result">
+																	<li ng-repeat="x in vm.result">
 																		<div class="text-center card-box">
 																			<div class="dropdown pull-right">
 																				<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
