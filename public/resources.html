@@ -1,597 +1,309 @@
 <!DOCTYPE html>
 <html>
-    
-<head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-        <meta name="author" content="Coderthemes">
-
-        <!-- App Favicon -->
-        <link rel="shortcut icon" href="assets/images/favicon.ico">
-
-        <!-- App title -->
-        <title>Adminto - Responsive Admin Dashboard Template</title>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- Custom box (Modal) css -->
-        <link href="assets/plugins/custombox/dist/custombox.min.css" rel="stylesheet">
-        <!-- Dragula (Drag and drop) css -->
-        <link href="assets/plugins/dragula/dragula.min.css" rel="stylesheet">
-
-        <!-- App CSS -->
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/core.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/components.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
-
-       
-<script src="js/angular.min.js"></script>
- 
-        <script src="assets/js/modernizr.min.js"></script>
-
-
-    </head>
-
-
-    <body class="fixed-left" ng-app="myApp" ng-controller="totalemployeesinprojectCtrl" ng-init="totalemployeesinproject()">
-
-        <!-- Begin page -->
-        <div id="wrapper">
-
-            <!-- Top Bar Start -->
-            <div class="topbar">
-
-                <!-- LOGO -->
-                <div class="topbar-left">
-                    <a href="index.html" class="logo"><span>Admin<span>to</span></span><i class="zmdi zmdi-layers"></i></a>
-                </div>
-
-                <!-- Button mobile view to collapse sidebar menu -->
-                <div class="navbar navbar-default" role="navigation">
-                    <div class="container">
-
-                        <!-- Page title -->
-                        <ul class="nav navbar-nav navbar-left">
-                            <li>
-                                <button class="button-menu-mobile open-left">
-                                    <i class="zmdi zmdi-menu"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <h4 class="page-title">RESOURCES</h4>
-                            </li>
-                        </ul>
-
-                        
-
-                    </div><!-- end container -->
-                </div><!-- end navbar -->
-            </div>
-            <!-- Top Bar End -->
-
-
-            <!-- ========== Left Sidebar Start ========== -->
-            <div class="left side-menu">
-                <div class="sidebar-inner slimscrollleft">
-
-                    <!-- User -->
-                    <div class="user-box">
-                        <div class="user-img">
-                            <img src="assets/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
-                            <div class="user-status offline"><i class="zmdi zmdi-dot-circle"></i></div>
-                        </div>
-                        <h5><a href="#">Mat Helme</a> </h5>
-                        <ul class="list-inline">
-                            
-
-                            <li>
-                                <a href="/Login" class="text-custom">
-                                    <i class="zmdi zmdi-power"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- End User -->
-
-                    <!--- Sidemenu -->
-                    <div id="sidebar-menu">
-                        <ul>
-                        	<li class="text-muted menu-title">Navigation</li>
-
-                            <li>
-                                <a href="/managerprofile" class="waves-effect"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
-                            </li>
-
-                            <li>
-                                <a href="typography.html" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Edit Profile </span> </a>
-                            </li>
-
-                            <li>
-                                <a href="/projects" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> PROJECTS </span> </a>
-                            </li>
-
-
-
-
-
-
-
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!-- Sidebar -->
-                    <div class="clearfix"></div>
-
-                </div>
-
-            </div>
-            <!-- Left Sidebar End -->
-
-
-
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
-            <div class="content-page">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container">
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card-box taskboard-box">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            
-											     <li><a ng-click="out()">View Resources</a></li>
-                                       
-                                        </ul>
-                                    </div>
-
-                        			<h4 class="header-title m-t-0 m-b-30 text-primary">Billable Resources</h4>
-
-                                    <ul class="list-unstyled task-list" id="drag-upcoming">
-                                        <li ng-repeat="x in result">
-                                            <div class="card-box kanban-box">
-        
+	<head>
+		<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+					<meta name="author" content="Coderthemes">
+						<!-- App Favicon -->
+						<link rel="shortcut icon" href="assets/images/favicon.ico">
+							<!-- App title -->
+							<title>PORTFOLIO APP</title>
+							<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+								<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+									<!-- Custom box (Modal) css -->
+									<link href="assets/plugins/custombox/dist/custombox.min.css" rel="stylesheet">
+										<!-- Dragula (Drag and drop) css -->
+										<link href="assets/plugins/dragula/dragula.min.css" rel="stylesheet">
+											<!-- App CSS -->
+											<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+											<link href="assets/css/core.css" rel="stylesheet" type="text/css" />
+											<link href="assets/css/components.css" rel="stylesheet" type="text/css" />
+											<link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+											<link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
+											<link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
+											<link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+											<script src="js/angular.min.js"></script>
+											<script src="js/controllers/resourcesctrl.js"></script>
+										</head>
+										<body class="fixed-left" ng-app="myApp" ng-controller="totalemployeesinprojectCtrl" ng-init="totalemployeesinproject()">
+											<!-- Begin page -->
+											<div id="wrapper">
+												<!-- Top Bar Start -->
+												<div class="topbar">
+													<!-- LOGO -->
+													<div class="topbar-left">
+														<a href="index.html" class="logo">
+															<span>PORTFOLIO
+																<span>APP</span>
+															</span>
+															<i class="zmdi zmdi-layers"></i>
+														</a>
+													</div>
+													<!-- Button mobile view to collapse sidebar menu -->
+													<div class="navbar navbar-default" role="navigation">
+														<div class="container">
+															<!-- Page title -->
+															<ul class="nav navbar-nav navbar-left">
+																<li>
+																	<button class="button-menu-mobile open-left">
+																		<i class="zmdi zmdi-menu"></i>
+																	</button>
+																</li>
+																<li>
+																	<h4 class="page-title">RESOURCES</h4>
+																</li>
+															</ul>
+														</div>
+														<!-- end container -->
+													</div>
+													<!-- end navbar -->
+												</div>
+												<!-- Top Bar End -->
+												<!-- ========== Left Sidebar Start ========== -->
+												<div class="left side-menu">
+													<div class="sidebar-inner slimscrollleft">
+														<!-- User -->
+														<div class="user-box">
+															<div class="user-img">
+																<img src="assets/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
+																	<div class="user-status offline">
+																		<i class="zmdi zmdi-dot-circle"></i>
+																	</div>
+																</div>
+																<h5>
+																	<a href="#">Mat Helme</a>
+																</h5>
+																<ul class="list-inline">
+																	<li>
+																		<a href="/Login" class="text-custom">
+																			<i class="zmdi zmdi-power"></i>
+																		</a>
+																	</li>
+																</ul>
+															</div>
+															<!-- End User -->
+															<!--- Sidemenu -->
+															<div id="sidebar-menu">
+																<ul>
+																	<li class="text-muted menu-title">Navigation</li>
+																	<li>
+																		<a href="/managerprofile" class="waves-effect">
+																			<i class="zmdi zmdi-view-dashboard"></i>
+																			<span> Dashboard </span>
+																		</a>
+																	</li>
+																	<li>
+																		<a href="typography.html" class="waves-effect">
+																			<i class="zmdi zmdi-format-underlined"></i>
+																			<span> Edit Profile </span>
+																		</a>
+																	</li>
+																	<li>
+																		<a href="/projects" class="waves-effect">
+																			<i class="zmdi zmdi-format-underlined"></i>
+																			<span> PROJECTS </span>
+																		</a>
+																	</li>
+																</ul>
+																<div class="clearfix"></div>
+															</div>
+															<!-- Sidebar -->
+															<div class="clearfix"></div>
+														</div>
+													</div>
+													<!-- Left Sidebar End -->
+													<!-- ============================================================== -->
+													<!-- Start right Content here -->
+													<!-- ============================================================== -->
+													<div class="content-page">
+														<!-- Start content -->
+														<div class="content">
+															<div class="container">
+																<div class="row">
+																	<div class="col-md-4">
+																		<div class="card-box taskboard-box">
+																			<div class="dropdown pull-right">
+																				<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+																					<i class="zmdi zmdi-more-vert"></i>
+																				</a>
+																				<ul class="dropdown-menu" role="menu">
+																					<li>
+																						<a ng-click="out()">View Resources</a>
+																					</li>
+																				</ul>
+																			</div>
+																			<h4 class="header-title m-t-0 m-b-30 text-primary">Billable Resources</h4>
+																			<ul class="list-unstyled task-list" id="drag-upcoming">
+																				<li ng-repeat="x in result">
+																					<div class="card-box kanban-box">
+																						<div class="kanban-detail">
+																							<span class="label label-danger pull-right">{{x.skillset}}</span>
+																							<h4>
+																								<span class="label label-danger">
+																									<i ng-click="removefromproject(x._id)" class="fa fa-trash"></i>
+																								</span>
+																								<a href="#">{{x.project}}</a>
+																							</h4>
+																							<ul class="list-inline m-b-0">
+																								<li>
+																									<a href="#" data-toggle="tooltip" data-placement="top"
+                                                               title="" data-original-title="Username">
+																										<img src="images/portfolio/{{x.uploadimage}}" alt="img"
+                                                                     class="thumb-sm img-circle">
+																										</a>
+																									</li>
+																									<li>
+																										<a  href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{x._id}}">{{x.username}}
+                                    		
                                                         
-                                             
-                                                <div class="kanban-detail">
-											       
-                                               
-                                                 
-                                                    <span class="label label-danger pull-right">{{x.skillset}}</span>
-                                                    <h4><span class="label label-danger"><i ng-click="removefromproject(x._id)" class="fa fa-trash"></i></span>
-  <a href="#">{{x.project}}</a> </h4><ul class="list-inline m-b-0">
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Username">
-                                                                <img src="images/portfolio/{{x.uploadimage}}" alt="img"
-                                                                     class="thumb-sm img-circle">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                                           <a  href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{x._id}}">{{x.username}}
-                                    		
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
+																										</li>
+																										<li>
+																											<a href="#" data-toggle="tooltip" data-placement="top"
                                                                title="" data-original-title="3 Comments">
-                                                                <i class="zmdi zmdi-comment-outline"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
-
-                                    </ul>
-
-                                    
-                                </div>
-                            </div><!-- end col -->
-
-
-                            <div class="col-md-4">
-                                <div class="card-box taskboard-box">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            
-												     <li><a ng-click="shadowout()">View Resources</a></li>
-                                       
-                                        </ul>
-                                    </div>
-
-                        			<h4 class="header-title m-t-0 m-b-30 text-warning">Shadow Resources</h4>
-
-                                    <ul class="list-unstyled task-list" id="drag-inprogress">
-                                        <li ng-repeat="y in result1">
-                                            <div class="card-box kanban-box">
-                                                <div class="checkbox-wrapper">
-                                                    
-                                                </div>
-
-                                                <div class="kanban-detail">
-                                                    <span class="label label-danger pull-right">{{y.skillset}}</span>
-                                                    <h4><span class="label label-danger"><i ng-click="removefromproject(y._id)" class="fa fa-trash"></i></span>
-													<a href="#">{{y.project}}</a> </h4>
-                                                    <ul class="list-inline m-b-0">
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
+																												<i class="zmdi zmdi-comment-outline"></i>
+																											</a>
+																										</li>
+																									</ul>
+																								</div>
+																							</div>
+																						</li>
+																					</ul>
+																				</div>
+																			</div>
+																			<!-- end col -->
+																			<div class="col-md-4">
+																				<div class="card-box taskboard-box">
+																					<div class="dropdown pull-right">
+																						<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+																							<i class="zmdi zmdi-more-vert"></i>
+																						</a>
+																						<ul class="dropdown-menu" role="menu">
+																							<li>
+																								<a ng-click="shadowout()">View Resources</a>
+																							</li>
+																						</ul>
+																					</div>
+																					<h4 class="header-title m-t-0 m-b-30 text-warning">Shadow Resources</h4>
+																					<ul class="list-unstyled task-list" id="drag-inprogress">
+																						<li ng-repeat="y in result1">
+																							<div class="card-box kanban-box">
+																								<div class="checkbox-wrapper"></div>
+																								<div class="kanban-detail">
+																									<span class="label label-danger pull-right">{{y.skillset}}</span>
+																									<h4>
+																										<span class="label label-danger">
+																											<i ng-click="removefromproject(y._id)" class="fa fa-trash"></i>
+																										</span>
+																										<a href="#">{{y.project}}</a>
+																									</h4>
+																									<ul class="list-inline m-b-0">
+																										<li>
+																											<a href="#" data-toggle="tooltip" data-placement="top"
                                                                title="" data-original-title="Username">
-                                                                <img src="images/portfolio/{{y.uploadimage}}" alt="img"
+																												<img src="images/portfolio/{{y.uploadimage}}" alt="img"
                                                                      class="thumb-sm img-circle">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                                            <a  href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{y._id}}">{{y.username}}
+																												</a>
+																											</li>
+																											<li>
+																												<a  href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{y._id}}">{{y.username}}
                                     		
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
+                                                        
+																												</li>
+																												<li>
+																													<a href="#" data-toggle="tooltip" data-placement="top"
                                                                title="" data-original-title="3 Comments">
-                                                                <i class="zmdi zmdi-comment-outline"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
-                                    </ul>
-
-                                    
-                                </div>
-                            </div><!-- end col -->
-
-
-                            <div class="col-md-4">
-                                <div class="card-box taskboard-box">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                           
-												     <li><a ng-click="benchout()">View Resources</a></li>
-                                       
-                                        </ul>
-                                    </div>
-
-                        			<h4 class="header-title m-t-0 m-b-30 text-success">Bench Resources</h4>
-
-                                    <ul class="list-unstyled task-list" id="drag-complete">
-                                        <li ng-repeat="z in result2">
-                                            <div class="card-box kanban-box">
-                                                <div class="checkbox-wrapper">
-                                                    
-                                                </div>
-
-                                                <div class="kanban-detail">
-                                                    <span class="label label-danger pull-right">{{z.skillset}}</span>
-                                                    <h4><span class="label label-danger"><i ng-click="addemployees(z)" class="zmdi zmdi-plus"></i></span>
-													<a href="#">{{z.project}}</a> </h4>
-                                                    <ul class="list-inline m-b-0">
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
+																														<i class="zmdi zmdi-comment-outline"></i>
+																													</a>
+																												</li>
+																											</ul>
+																										</div>
+																									</div>
+																								</li>
+																							</ul>
+																						</div>
+																					</div>
+																					<!-- end col -->
+																					<div class="col-md-4">
+																						<div class="card-box taskboard-box">
+																							<div class="dropdown pull-right">
+																								<a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+																									<i class="zmdi zmdi-more-vert"></i>
+																								</a>
+																								<ul class="dropdown-menu" role="menu">
+																									<li>
+																										<a ng-click="benchout()">View Resources</a>
+																									</li>
+																								</ul>
+																							</div>
+																							<h4 class="header-title m-t-0 m-b-30 text-success">Bench Resources</h4>
+																							<ul class="list-unstyled task-list" id="drag-complete">
+																								<li ng-repeat="z in result2">
+																									<div class="card-box kanban-box">
+																										<div class="checkbox-wrapper"></div>
+																										<div class="kanban-detail">
+																											<span class="label label-danger pull-right">{{z.skillset}}</span>
+																											<h4>
+																												<span class="label label-danger">
+																													<i ng-click="addemployees(z)" class="zmdi zmdi-plus"></i>
+																												</span>
+																												<a href="#">{{z.project}}</a>
+																											</h4>
+																											<ul class="list-inline m-b-0">
+																												<li>
+																													<a href="#" data-toggle="tooltip" data-placement="top"
                                                                title="" data-original-title="Username">
-                                                                <img src="images/portfolio/{{z.uploadimage}}" alt="img"
+																														<img src="images/portfolio/{{z.uploadimage}}" alt="img"
                                                                      class="thumb-sm img-circle">
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a  href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{z._id}}">{{z.username}}
+																														</a>
+																													</li>
+																													<li>
+																														<a  href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{z._id}}">{{z.username}}
                                     		
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" data-toggle="tooltip" data-placement="top"
+                                                        
+																														</li>
+																														<li>
+																															<a href="#" data-toggle="tooltip" data-placement="top"
                                                                title="" data-original-title="3 Comments">
-                                                                <i class="zmdi zmdi-comment-outline"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
-                                    </ul>
-
-                                </div>
-                            </div><!-- end col -->
-
-
-                        </div>
-                        <!-- end row -->
-
-
-                    </div> <!-- container -->
-
-                </div> <!-- content -->
-
-                <footer class="footer">
-                    2016 - 2017 © Adminto.
+																																<i class="zmdi zmdi-comment-outline"></i>
+																															</a>
+																														</li>
+																													</ul>
+																												</div>
+																											</div>
+																										</li>
+																									</ul>
+																								</div>
+																							</div>
+																							<!-- end col -->
+																						</div>
+																						<!-- end row -->
+																					</div>
+																					<!-- container -->
+																				</div>
+																				<!-- content -->
+																				<footer class="footer">
+                    MIRACLE SOTWARE SYSTEMS
                 </footer>
-
-            </div>
-
-
-            <!-- Modal -->
-
-            <!-- ============================================================== -->
-            <!-- End Right content here -->
-            <!-- ============================================================== -->
-
-
-
-        </div>
-        <!-- END wrapper -->
-
-
-
-        <script>
+																			</div>
+																			<!-- Modal -->
+																			<!-- ============================================================== -->
+																			<!-- End Right content here -->
+																			<!-- ============================================================== -->
+																		</div>
+																		<!-- END wrapper -->
+																		<script>
             var resizefunc = [];
         </script>
-
-        <!-- jQuery  -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/detect.js"></script>
-        <script src="assets/js/fastclick.js"></script>
-        <script src="assets/js/jquery.slimscroll.js"></script>
-        <script src="assets/js/jquery.blockUI.js"></script>
-        <script src="assets/js/waves.js"></script>
-        <script src="assets/js/jquery.nicescroll.js"></script>
-        <script src="assets/js/jquery.scrollTo.min.js"></script>
-
-        <!-- drgula (Drag and drop) js -->
-        <script src="assets/plugins/dragula/dragula.min.js"></script>
-
-        <!-- Modal-Effect -->
-        <script src="assets/plugins/custombox/dist/custombox.min.js"></script>
-        <script src="assets/plugins/custombox/dist/legacy.min.js"></script>
-
-        <!-- App js -->
-        <script src="assets/js/jquery.core.js"></script>
-        <script src="assets/js/jquery.app.js"></script>
-
-        
-
-		
-				<script>
-
-var app = angular.module('myApp', []);
-app.controller('totalemployeesinprojectCtrl', function($scope,$rootScope,$http,$window) {
-   
-   
-   	$scope.addemployees = function(z) {
-	var employee = z._id;
-	z.status=1;
-	z.project = localStorage.getItem('project');
-	
-
-	var resourcetype = prompt("BILLABLE OR SHADOW", "BILLABLE");
-    
-      var json = {
-        "_id": employee,
-		"project":z.project,
-		"resourcetype":resourcetype
-		};
-		
-		console.log("RESOURCE TYPE"+resourcetype)
-		
-		z.resourcetype=resourcetype;
-		
-		$http.post("/updateavailableresources",json).then(function(response) {
-            
-			
-			if (response.data.error == undefined) {
-			
-			 
-
-                                $window.alert('Employee added successfully');
-
-            } else {
-                $window.alert('No resource is available');
-
-            }
-			
-			
-			
-			
-			
-        })
-		
-		
-			
-                
-              
-            
-            $rootScope.employees = z;
-			console.log("EMP JSON"+JSON.stringify($rootScope.employees));
-			
-			
-			
-			var projectname = z.project;
-		
-		;
-	var employeename = $rootScope.employees;
-	
-	  var json = {
-
-        "projectname": projectname,
-		"employeename": employeename,
-		};
-		
-		
-		console.log("UPDATING EACH EMP DETAILS"+JSON.stringify(json))
-		$http.post("/updateprojectdetails",json).then(function(response) {
-            
-			
-			if (response.data.error == undefined) {
-			     $window.alert('Changes made Successfully');
-
-           	
-				 
-
-                
-            } else {
-                $window.alert('Please Check Entered ID');
-
-            }
-			
-	    })
-			
-		
-	}
-    
-	$scope.removefromproject = function(params) {
-	
-	var gmailid = params;
-      var json = {
-
-        "projectname": localStorage.getItem('project'),
-		"gmailid": gmailid,
-		};
-		
-		
-		
-		
-		
-		$http.post("/editprojectresources",json).then(function(response) {
-            
-			
-			if (response.data.error == undefined) {
-			     $window.alert('Resource Deleted Successfully');
-
-           	
-				 
-
-                
-            } else {
-                $window.alert('Please Check Entered ID');
-
-            }
-			
-			
-			
-			
-			
-        })
-		
-		
-	}
-	
-	
-	
-	$scope.totalemployeesinproject = function(params) {
-	
-		var json = {
-
-        "_id": localStorage.getItem('project')
-		};
-	
-	
-		
-		$http.post("/totalbillableresourcesinproject",json).then(function(response) {
-            
-			
-			if (response.data.error == undefined) {
-			console.log("TOTAL BILLABLE EMPS IN PROJECT"+JSON.stringify(response))
-			
-
-			$scope.result=response.data.result;
-							
-				 
-                
-            } else {
-                $window.alert('NO BILLABLE RESOURCES');
-
-            }
-        })
-		$http.post("/totalshadowresourcesinproject",json).then(function(response) {
-			if (response.data.error == undefined) {
-			console.log("TOTAL SHADOW EMPS IN PROJECT"+JSON.stringify(response))
-			$scope.result1=response.data.result;
-            } else {
-                $window.alert('NO SHADOW RESOURCES');
-            }
-        })
-		$http.post("/totalbenchresources",json).then(function(response) {
-			if (response.data.error == undefined) {
-			console.log("TOTAL BENCH EMPS"+JSON.stringify(response))
-			$scope.result2=response.data.result;
-            } else {
-                $window.alert('NO BENCH RESOURCES');
-
-            }
-        })
-	
-	
-	}
-	
-	
-	
-	
-	
-	$scope.out = function() {
-	
-	
-	
-	
-		
-window.location.assign("/employeesbillableinfo");
-	
-	
-	}
-	
-	
-	$scope.shadowout = function() {
-	
-	
-	
-	
-		
-window.location.assign("/employeesshadowinfo");
-	
-	
-	}
-	
-	$scope.benchout = function() {
-	
-	
-	
-	
-		
-window.location.assign("/employeesbenchinfo");
-	
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-});
-</script>
- </body>
-
-</html>
+																		<!-- jQuery  -->
+																		<script src="assets/js/jquery.min.js"></script>
+																		<script src="assets/js/bootstrap.min.js"></script>
+																		<script src="assets/js/jquery.slimscroll.js"></script>
+																		<!-- Modal-Effect -->
+																		<script src="assets/plugins/custombox/dist/custombox.min.js"></script>
+																		<script src="assets/plugins/custombox/dist/legacy.min.js"></script>
+																		<!-- App js -->
+																		<script src="assets/js/jquery.core.js"></script>
+																		<script src="assets/js/jquery.app.js"></script>
+																	</body>
+																</html>
